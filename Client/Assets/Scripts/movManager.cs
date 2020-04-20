@@ -7,7 +7,7 @@ public class movManager : MonoBehaviour
     private InputManager inputManager;
     private CharacterController ch;
     private float speed = 6f;
-    private float gravity = -19f;
+    private float gravity = -15f;
     Vector3 velocity;
     private Animator anim;
     
