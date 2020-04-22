@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Models;
+
 public class Move : MonoBehaviour
 {   CharacterController player;
 
@@ -14,7 +14,6 @@ public class Move : MonoBehaviour
     ////
     private Animator anime;
     private InputManager inputManager;
-    private PlayerModel playeer;
     ////Gravidade
     private Vector3 velocity;
     public float gravity = -9.8f;
@@ -24,9 +23,7 @@ public class Move : MonoBehaviour
         player = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
         inputManager = GetComponent<InputManager>();
-        playeer = new PlayerModel();
-        playeer.setName("Higor Oliveira");
-        Debug.Log(playeer.getName());
+        
     }
 
     // Update is called once per frame
@@ -35,9 +32,9 @@ public class Move : MonoBehaviour
         MovePlayer();
         Gravity();
         SkillsPlayer();
+
         
-        
-        
+
     }
 
     private void MovePlayer(){
@@ -47,8 +44,14 @@ public class Move : MonoBehaviour
         
         playerInput = Vector3.ClampMagnitude(playerInput,1);
         playerInput = new Vector3(inputManager.getHorizontal(), 0f, inputManager.getVertical());
+
+        if (inputManager.getVertical() == 1)
+        {
+            playerInput.x = 0;
+        }
         
         
+    
         
         anime.SetFloat("Horizontal", inputManager.getHorizontal());
         anime.SetFloat("Vertical", inputManager.getVertical());
