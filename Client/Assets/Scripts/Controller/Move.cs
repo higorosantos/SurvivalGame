@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Models;
 
 public class Move : MonoBehaviour
 {   CharacterController player;
@@ -11,6 +12,8 @@ public class Move : MonoBehaviour
     public float verticalMove;
     private Vector3 playerInput;
     public float jumpForce = 3f;
+
+   
     ////
     private Animator anime;
     private InputManager inputManager;
@@ -32,7 +35,7 @@ public class Move : MonoBehaviour
         MovePlayer();
         Gravity();
         SkillsPlayer();
-
+        
         
 
     }
@@ -45,14 +48,26 @@ public class Move : MonoBehaviour
         playerInput = Vector3.ClampMagnitude(playerInput,1);
         playerInput = new Vector3(inputManager.getHorizontal(), 0f, inputManager.getVertical());
 
-        if (inputManager.getVertical() == 1)
+
+        if ( inputManager.getVertical() > 0.5f && inputManager.getHorizontal() > 0.5f || inputManager.getVertical() > 0.5f && inputManager.getHorizontal() < -0.5f)
         {
-            playerInput.x = 0;
+            playerInput = new Vector3(0f, 0f, inputManager.getVertical());
+            anime.SetBool("Front", true);
+
+        }
+        else if (inputManager.getVertical() < -0.5f && inputManager.getHorizontal() < -0.5f || inputManager.getVertical() < -0.5f && inputManager.getHorizontal() > 0.5f)
+        {
+            playerInput = new Vector3(0f, 0f, inputManager.getVertical());
+            anime.SetBool("Back", true);
+        }
+        else
+        {   
+            anime.SetBool("Front", false);
+            anime.SetBool("Back",false);
         }
         
-        
-    
-        
+
+
         anime.SetFloat("Horizontal", inputManager.getHorizontal());
         anime.SetFloat("Vertical", inputManager.getVertical());
 
@@ -73,10 +88,27 @@ public class Move : MonoBehaviour
 
     }
     private void SkillsPlayer(){
-        if(Input.GetButtonDown("Jump") && player.isGrounded){
+        //pular
+        if (Input.GetButtonDown("Jump") && player.isGrounded){
             velocity.y = Mathf.Sqrt(jumpForce * -2 * gravity);
+        }
+        //Correr
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            anime.SetBool("Run", true);
+            player.Move(transform.TransformDirection(playerInput) * (speedPlayer * 2) * Time.deltaTime);
+            
+        }
+        else
+        {
+            anime.SetBool("Run", false);
+
         }
     }
     
-    
-}
+   
+        
+    }
+
+
+
