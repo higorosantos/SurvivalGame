@@ -13,7 +13,7 @@ public class Move : MonoBehaviour
     private Vector3 playerInput;
     public float jumpForce = 3f;
 
-   
+    
     ////
     private Animator anime;
     private InputManager inputManager;
@@ -26,7 +26,7 @@ public class Move : MonoBehaviour
         player = GetComponent<CharacterController>();
         anime = GetComponent<Animator>();
         inputManager = GetComponent<InputManager>();
-        
+
     }
 
     // Update is called once per frame
@@ -95,8 +95,10 @@ public class Move : MonoBehaviour
         //Correr
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            anime.SetBool("Run", true);
-            player.Move(transform.TransformDirection(playerInput) * (speedPlayer * 2) * Time.deltaTime);
+            
+                anime.SetBool("Run", true);
+                player.Move(transform.TransformDirection(playerInput) * (speedPlayer * 2) * Time.deltaTime);
+          
             
         }
         else
