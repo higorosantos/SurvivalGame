@@ -6,32 +6,46 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerModel player;
-    [SerializeField]private Text name;
+    private PlayerModel playerBase;
+    [SerializeField]private Text nome;
     [SerializeField]private Text hp;
-    [SerializeField] private Slider hpBar; 
+    [SerializeField] private Slider hpBar;
+    [SerializeField] private Slider staminaBar;
+
+    private Animator anim;
        
     void Start()
     {
-        player = new PlayerModel();
-        player.setName("Higor Oliveira");
-        player.setArmor(0);
-        name.text = player.getName();
-        hp.text = player.getHp().ToString();
+        anim = GetComponent<Animator>();
+        playerBase = new PlayerModel();
+        playerBase.setName("Higor Oliveira");
+        playerBase.setArmor(0);
+        nome.text = playerBase.getName();
+        hp.text = playerBase.getHp().ToString();
         //hpBar.maxValue = 100f;
-        hpBar.value = player.getHp();
+        hpBar.value = playerBase.getHp();
+        staminaBar.value = playerBase.getStamina();
+        
 
     }
     private void Update()
     {
-        
+        if(anim.GetBool("Run") == true)
+        {
+          this.playerBase.setStamina(this.playerBase.getStamina() - 1);
+        }
+        Debug.Log(playerBase.getStamina());
     }
     private void OnTriggerEnter(Collider obj)
     {
        //Destroy(obj.gameObject);
-        player.Damage(25);
-        hp.text = player.getHp().ToString();
-        hpBar.value = player.getHp();
+        playerBase.Damage(25);
+        hp.text = playerBase.getHp().ToString();
+        hpBar.value = playerBase.getHp();
 
+    }
+    private void lossStamina()
+    {
+        this.playerBase.setStamina(this.playerBase.getStamina() - 1);
     }
 }

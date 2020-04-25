@@ -11,6 +11,7 @@ namespace Models {
         private float stamina = 100;
         private float xp = 0;
         
+        
 
         #region Set's
         public void setName(string name)
@@ -20,6 +21,10 @@ namespace Models {
         public void setArmor(float armor)
         {
             this.armor = armor;
+        }
+        public void setStamina(float stamina)
+        {
+            this.stamina = stamina;
         }
         #endregion
 
