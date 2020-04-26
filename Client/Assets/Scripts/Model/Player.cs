@@ -26,6 +26,10 @@ namespace Models {
         {
             this.stamina = stamina;
         }
+        public void setHp(float hp)
+        {
+            this.hp = hp;
+        }
         #endregion
 
         #region Get's
@@ -51,14 +55,8 @@ namespace Models {
         }
         #endregion
 
-        public void HealHP(float hp)
-        {
-            this.hp = this.hp + hp;
-        }
-        public void Damage(float damage)
-        {
-            this.hp = this.hp - damage;
-        }
+
+
         public void addExp(float xp)
         {
             this.xp = this.xp + xp;
