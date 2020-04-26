@@ -21,6 +21,7 @@ public class camManager : MonoBehaviour
     private Vector3 smoothVelocity;
     //Rotação Atual usado para ajudar no Vector3.SmoothDamp
     private Vector3 currentRotation;
+    
 
 
 
@@ -30,6 +31,10 @@ public class camManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         
     }
+    private void Update()
+    {
+        
+    }
 
     void LateUpdate()
     {
@@ -37,6 +42,7 @@ public class camManager : MonoBehaviour
         camMov();
         walkingDetected();
         cameraCollision();
+        
 
 
     }
@@ -100,4 +106,5 @@ public class camManager : MonoBehaviour
         }
         
     }
+   
 }
