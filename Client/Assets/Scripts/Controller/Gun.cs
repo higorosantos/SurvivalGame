@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     public float damege = 10f;
     public float range = 100f;
+    public GameObject teste;
 
     public GameObject TargetArma;
     // Update is called once per frame
@@ -23,14 +24,16 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(TargetArma.transform.position, TargetArma.transform.forward, out hit, range))
         {
+            Debug.DrawLine(transform.position, hit.point);
             Debug.Log(hit.transform.name);
-
+            Instantiate(teste,hit.point,Quaternion.Euler(hit.normal));
           Target target = hit.transform.GetComponent<Target>();
             if (target != null)
             {
                 target.Takedamage(damege);
             }
         }
+       
     }
     
 }

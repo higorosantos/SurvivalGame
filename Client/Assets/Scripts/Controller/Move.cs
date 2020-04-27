@@ -12,6 +12,8 @@ public class Move : MonoBehaviour
     public float verticalMove;
     private Vector3 playerInput;
     public float jumpForce = 3f;
+    public bool Jump = false;
+    
 
     
     ////
@@ -93,7 +95,7 @@ public class Move : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpForce * -2 * gravity);
         }
         //Correr
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)&& player.isGrounded)
         {
             
                 anime.SetBool("Run", true);
