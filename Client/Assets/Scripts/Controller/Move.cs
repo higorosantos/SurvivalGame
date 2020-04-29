@@ -95,7 +95,7 @@ public class Move : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpForce * -2 * gravity);
         }
         //Correr
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W)&& player.isGrounded)
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
             
                 anime.SetBool("Run", true);
