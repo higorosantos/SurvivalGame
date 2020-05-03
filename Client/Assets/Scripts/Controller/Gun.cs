@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public ParticleSystem muzzleflash;
     public float damege = 10f;
     public float range = 100f;
     public GameObject teste;
@@ -16,6 +17,7 @@ public class Gun : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
+            muzzleflash.Emit(1);
             
         }
     }
